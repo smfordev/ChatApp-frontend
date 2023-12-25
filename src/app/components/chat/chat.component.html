@@ -1,7 +1,14 @@
 <div class="flex-container">
   <div class="card primaryCard">
-    <div class="welcome">
-      <h2>SHARE NOW YOUR IDEAS WITH THE WORLD</h2>
+    <div>
+      <div [ngClass]="{'typing' : typingUsers.length>0 && typingUsers[typingUsers.length-1] !== getUsername}" *ngIf="typingUsers.length>0">
+        <div *ngIf="typingUsers[typingUsers.length-1] !== getUsername">
+          {{ typingUsers[typingUsers.length-1] }} is typing...
+        </div>
+      </div>
+      <div class="welcome">
+        <h2>SHARE NOW YOUR IDEAS WITH THE WORLD</h2>
+      </div>
     </div>
     <div class="chatContainer">
       <div #scrollMe class="chatContainerTop">
@@ -20,45 +27,33 @@
             {{ msg.content }}
           </div>
         </div>
-        <div>
-          <div *ngFor="let username of typingUsers">
-            {{ username }} is typing...
-          </div>
-        </div>
       </div>
     </div>
     <footer>
       <form (ngSubmit)="submit()">
         <textarea
-          id="message-input"
           [(ngModel)]="message"
           (blur)="onBlurEvent()"
           (focus)="onFocusEvent()"
           name="message"
           placeholder="Type a message"
+          (keydown.enter)="submit()"
+          (input)="adjustTextArea($event)"
           required
         ></textarea>
-        <button type="submit" id="send-message">
+        <button type="submit">
           <img src="assets/send.svg" />
         </button>
       </form>
     </footer>
   </div>
 
-  <div class="card" style="display: flex; flex-direction: column; gap: 5px">
-    <div *ngFor="let username of connectedUsers">
-      <div
-        style="
-          border-radius: 10px;
-          width: 100px;
-          height: 50px;
-          background-color: #3c3c3c;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        "
-      >
-        🟢 {{ username }}
+  <div class="usersPanel">
+    <div class="usersCard">
+      <div *ngFor="let username of connectedUsers">
+        <div class="onlineCard">
+          <span class="dot"></span> {{ username }}
+        </div>
       </div>
     </div>
   </div>

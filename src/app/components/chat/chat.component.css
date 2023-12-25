@@ -23,6 +23,13 @@
     grid-template-rows: 24% 65% auto;
 }
 
+.typing {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    color: #888;
+}
+
 .secondaryCard {
     opacity: 0.8;
     width: 320px;
@@ -134,7 +141,6 @@ textarea {
     width: 100%;
     min-height: 15px;
     height: 15px;
-    max-height: 48px;
     resize:none;
     overflow-y: hidden;
 }
@@ -149,8 +155,43 @@ button {
     cursor: pointer;
 }
 
+.usersPanel {
+    height: 650px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.usersCard {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 26px;
+    color: white;
+    background-color: #171717;
+    position: relative;
+    animation-name: card;
+    animation-duration: 3s;
+    overflow: auto;
+}
+
+.onlineCard {
+    height: 25px;    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    background-color: #4CBB17;
+    border-radius: 50%;
+    margin-right: 10px;
+}
 
 @keyframes card {
     10%   {top:90vh;}
     100% {top:0px;}
-  }
+}

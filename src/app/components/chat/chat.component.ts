@@ -9,6 +9,7 @@ import { SocketService } from 'src/app/services/socket.service';
   styleUrls: ['./chat.component.css'],
 })
 export class ChatComponent implements OnInit {
+  
   messages: Message[] = [];
 
   message = '';
@@ -84,5 +85,19 @@ export class ChatComponent implements OnInit {
       this.myScrollContainer.nativeElement.scrollTop =
         this.myScrollContainer.nativeElement.scrollHeight;
     } catch (err) {}
+  }
+
+  adjustTextArea(event: any): void {
+    const textArea: HTMLTextAreaElement = event.target;
+    textArea.style.height = '15px'; // Reset the height
+    const scrollHeight = textArea.scrollHeight;
+
+    if (scrollHeight > 28) {
+      // Use max-height here
+      textArea.style.height = '28px';
+      textArea.style.overflowY = 'auto';
+    } else {
+      textArea.style.overflowY = 'hidden';
+    }
   }
 }
