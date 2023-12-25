@@ -1,3 +1,56 @@
+<script>
+    const socket = io('http://localhost:3000');
+
+const usernameInput = document.getElementById('username');
+const joinChatBtn = document.getElementById('join-chat');
+const messageInput = document.getElementById('message-input');
+const sendMessageBtn = document.getElementById('send-message');
+const messagesList = document.getElementById('messages');
+const chat = document.getElementById('chat');
+
+joinChatBtn.addEventListener('click', function() {
+  const username = usernameInput.value.trim();
+  if (username) {
+    socket.emit('setUsername', username);
+    chat.style.display = 'block';
+  } else {
+    alert('Please enter a username.');
+  }
+});
+
+sendMessageBtn.addEventListener('click', function() {
+  const message = messageInput.value;
+  socket.emit('message', message);
+  messageInput.value = '';
+});
+
+socket.on('message', function(data) {
+  const item = document.createElement('li');
+  item.textContent = `${data.user}: ${data.text}`;
+  messagesList.appendChild(item);
+  window.scrollTo(0, document.body.scrollHeight);
+});
+
+socket.on('userJoined', function(username) {
+  const item = document.createElement('li');
+  item.textContent = `${username} has joined the chat.`;
+  messagesList.appendChild(item);
+});
+
+socket.on('userLeft', function(username) {
+  const item = document.createElement('li');
+  item.textContent = `${username} has left the chat.`;
+  messagesList.appendChild(item);
+});
+
+socket.on('chatHistory', function(messages) {
+  messages.forEach(function(message) {
+    const item = document.createElement('li');
+    item.textContent = `${message.user}: ${message.text}`;
+    messagesList.appendChild(item);
+  });
+});
+</script>
 <div class="flex-container">
  
     <div class="card primaryCard">
@@ -12,24 +65,13 @@
                         <div class="message" [ngClass]="msg.sender===getUsername ? 'mainMessage' : 'externalMessage'">{{msg.content}}</div>
                     </div>
                 </div>
-                <!-- <div>
-                    <label>Mot de passe</label>
-                    <br/>
-                    <input/>
-                </div>
-                <div>
-                    <a>Mot de passe oublié ?</a>
-                </div> -->
                 <footer>
                     <form (ngSubmit)="submit()">
-                        <textarea [(ngModel)]="message" name="message" placeholder="Type a message" required></textarea>
-                        <button type="submit"><img src="assets/send.svg"/></button>
+                        <textarea id="message-input" [(ngModel)]="message" name="message" placeholder="Type a message" required></textarea>
+                        <button type="submit" id="send-message"><img src="assets/send.svg"/></button>
                     </form>
                 </footer>
             </div>
-            <!-- <div>
-            <p>Nouveau sur cette plateforme ?&nbsp;</p><a className='text-[#4CBB17]'>Inscrivez-vous</a>
-            </div> -->
         </div>
     </div>
 
