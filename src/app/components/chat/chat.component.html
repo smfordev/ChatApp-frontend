@@ -1,78 +1,65 @@
-<script>
-    const socket = io('http://localhost:3000');
-
-const usernameInput = document.getElementById('username');
-const joinChatBtn = document.getElementById('join-chat');
-const messageInput = document.getElementById('message-input');
-const sendMessageBtn = document.getElementById('send-message');
-const messagesList = document.getElementById('messages');
-const chat = document.getElementById('chat');
-
-joinChatBtn.addEventListener('click', function() {
-  const username = usernameInput.value.trim();
-  if (username) {
-    socket.emit('setUsername', username);
-    chat.style.display = 'block';
-  } else {
-    alert('Please enter a username.');
-  }
-});
-
-sendMessageBtn.addEventListener('click', function() {
-  const message = messageInput.value;
-  socket.emit('message', message);
-  messageInput.value = '';
-});
-
-socket.on('message', function(data) {
-  const item = document.createElement('li');
-  item.textContent = `${data.user}: ${data.text}`;
-  messagesList.appendChild(item);
-  window.scrollTo(0, document.body.scrollHeight);
-});
-
-socket.on('userJoined', function(username) {
-  const item = document.createElement('li');
-  item.textContent = `${username} has joined the chat.`;
-  messagesList.appendChild(item);
-});
-
-socket.on('userLeft', function(username) {
-  const item = document.createElement('li');
-  item.textContent = `${username} has left the chat.`;
-  messagesList.appendChild(item);
-});
-
-socket.on('chatHistory', function(messages) {
-  messages.forEach(function(message) {
-    const item = document.createElement('li');
-    item.textContent = `${message.user}: ${message.text}`;
-    messagesList.appendChild(item);
-  });
-});
-</script>
 <div class="flex-container">
- 
-    <div class="card primaryCard">
-        <div>
-            <div class="welcome">
-                <h2>SHARE NOW YOUR IDEAS WITH THE WORLD</h2>
-            </div>
-            <div class="chatContainer">
-                <div #scrollMe class="chatContainerTop">
-                    <div *ngFor="let msg of messages" class="chat" [ngClass]="{'main' : msg.sender===getUsername}">
-                        <div class="label">@{{msg.sender}}</div>
-                        <div class="message" [ngClass]="msg.sender===getUsername ? 'mainMessage' : 'externalMessage'">{{msg.content}}</div>
-                    </div>
-                </div>
-                <footer>
-                    <form (ngSubmit)="submit()">
-                        <textarea id="message-input" [(ngModel)]="message" name="message" placeholder="Type a message" required></textarea>
-                        <button type="submit" id="send-message"><img src="assets/send.svg"/></button>
-                    </form>
-                </footer>
-            </div>
-        </div>
+  <div class="card primaryCard">
+    <div class="welcome">
+      <h2>SHARE NOW YOUR IDEAS WITH THE WORLD</h2>
     </div>
+    <div class="chatContainer">
+      <div #scrollMe class="chatContainerTop">
+        <div
+          *ngFor="let msg of messages"
+          class="chat"
+          [ngClass]="{ main: msg.sender === getUsername }"
+        >
+          <div class="label">@{{ msg.sender }}</div>
+          <div
+            class="message"
+            [ngClass]="
+              msg.sender === getUsername ? 'mainMessage' : 'externalMessage'
+            "
+          >
+            {{ msg.content }}
+          </div>
+        </div>
+        <div>
+          <div *ngFor="let username of typingUsers">
+            {{ username }} is typing...
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <form (ngSubmit)="submit()">
+        <textarea
+          id="message-input"
+          [(ngModel)]="message"
+          (blur)="onBlurEvent()"
+          (focus)="onFocusEvent()"
+          name="message"
+          placeholder="Type a message"
+          required
+        ></textarea>
+        <button type="submit" id="send-message">
+          <img src="assets/send.svg" />
+        </button>
+      </form>
+    </footer>
+  </div>
 
+  <div class="card" style="display: flex; flex-direction: column; gap: 5px">
+    <div *ngFor="let username of connectedUsers">
+      <div
+        style="
+          border-radius: 10px;
+          width: 100px;
+          height: 50px;
+          background-color: #3c3c3c;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
+      >
+        🟢 {{ username }}
+      </div>
+    </div>
+  </div>
 </div>

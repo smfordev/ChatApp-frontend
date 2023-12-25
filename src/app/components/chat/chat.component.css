@@ -19,6 +19,8 @@
 .primaryCard {
     width: 650px;
     height: 650px;
+    display: grid;
+    grid-template-rows: 24% 65% auto;
 }
 
 .secondaryCard {
@@ -43,9 +45,11 @@
 }
 
 .chatContainer {
-    margin: auto;
+    /* margin: auto;
     margin-top: 20px;
-    max-height: 450px;
+    max-height: 450px; */
+    /* display: grid;
+    grid-template-rows: 80% auto; */
 }
 
 .chatContainerTop {
@@ -61,16 +65,16 @@
 ::-webkit-scrollbar {
     width: 4px;
 }
-   
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #888; 
+    background: #888;
     border-radius: 8px;
 }
-  
+
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
+    background: #555;
 }
 
 .chat {
@@ -95,7 +99,7 @@
     width: fit-content;
     height: fit-content;
     white-space: normal;
-    overflow-wrap: break-word; 
+    overflow-wrap: break-word;
     padding: 8px ;
 }
 
@@ -115,7 +119,6 @@ footer {
     padding-left: 50px;
 }
 form {
-    /* position: fixed; */
     display: flex;
     border-bottom: 2px solid #FFFFFF;
     padding-top: 12px;
@@ -132,7 +135,7 @@ textarea {
     min-height: 15px;
     height: 15px;
     max-height: 48px;
-    resize:none; 
+    resize:none;
     overflow-y: hidden;
 }
 

@@ -3,15 +3,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { Socket } from 'socket.io';
+import { SocketService } from 'src/app/services/socket.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  private baseUrl = 'http://localhost:3000';
 
-  constructor(private fb : FormBuilder, private authService: AuthService, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   loginForm = this.fb.group({
     username: ['', Validators.required],
@@ -31,21 +38,16 @@ export class LoginComponent {
   //   });
   // }
 
-
   authentication() {
-
     const username = this.loginForm.value.username;
-
-      this.authService.authentication(username as string).subscribe({
-        next: (res: any) => {
-          console.log(res,'response')
-          sessionStorage.setItem('username', username as string);
-          this.router.navigate(['/chat']);
-        },
-        error: (err) => {
-          console.log(err,'errors')
-        }
-      });
-    }
-
+    sessionStorage.setItem('username', username as string);
+    this.router.navigate(['/chat']);
+    // this.authService.authentication(username as string).subscribe({
+    //   next: (res: any) => {
+    //   },
+    //   error: (err) => {
+    //     console.log(err,'errors')
+    //   }
+    // });
+  }
 }
