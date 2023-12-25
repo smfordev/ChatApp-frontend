@@ -1,0 +1,36 @@
+<div class="flex-container">
+ 
+    <div class="card primaryCard">
+        <div>
+            <div class="welcome">
+                <h2>SHARE NOW YOUR IDEAS WITH THE WORLD</h2>
+            </div>
+            <div class="chatContainer">
+                <div #scrollMe class="chatContainerTop">
+                    <div *ngFor="let msg of messages" class="chat" [ngClass]="{'main' : msg.sender===getUsername}">
+                        <div class="label">@{{msg.sender}}</div>
+                        <div class="message" [ngClass]="msg.sender===getUsername ? 'mainMessage' : 'externalMessage'">{{msg.content}}</div>
+                    </div>
+                </div>
+                <!-- <div>
+                    <label>Mot de passe</label>
+                    <br/>
+                    <input/>
+                </div>
+                <div>
+                    <a>Mot de passe oublié ?</a>
+                </div> -->
+                <footer>
+                    <form (ngSubmit)="submit()">
+                        <textarea [(ngModel)]="message" name="message" placeholder="Type a message" required></textarea>
+                        <button type="submit"><img src="assets/send.svg"/></button>
+                    </form>
+                </footer>
+            </div>
+            <!-- <div>
+            <p>Nouveau sur cette plateforme ?&nbsp;</p><a className='text-[#4CBB17]'>Inscrivez-vous</a>
+            </div> -->
+        </div>
+    </div>
+
+</div>

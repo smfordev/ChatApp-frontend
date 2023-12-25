@@ -1,0 +1,50 @@
+<div class="flex-container">
+    <div class="card secondaryCard">
+        <div class="description">
+            <div style="margin-bottom: 14px;">
+                <img src="assets/info_outline.svg"/>
+            </div>
+            <div>
+                This platform is created by developers who believe that anyone can share their ideas with people all over the world. This community can talk about any topic that 
+                it deems important to discuss with others. These topics can be trends, ideologies, or more. This platform believes in communication as you do.
+            </div>
+        </div>
+    </div>
+
+    <div class="card primaryCard">
+        <div class="welcomeCard">
+            <div class="welcome">
+            <h2>WELCOME TO OUR COMMUNITY</h2>
+            </div>
+            <form [formGroup]="loginForm" (ngSubmit)="authentication()">
+                <div class="username">
+                    <div class="label">Username</div>
+                    <input formControlName="username" name="username" placeholder="Tape your username" required/>
+                </div>
+                <!-- <div>
+                    <label>Mot de passe</label>
+                    <br/>
+                    <input/>
+                </div>
+                <div>
+                    <a>Mot de passe oublié ?</a>
+                </div> -->
+                <button type="submit">Connect with us</button>
+            </form>
+            <!-- <div>
+            <p>Nouveau sur cette plateforme ?&nbsp;</p><a className='text-[#4CBB17]'>Inscrivez-vous</a>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="card secondaryCard">
+        <div class="description">
+            <div style="margin-bottom: 14px;">
+                <img src="assets/warning.svg"/>
+            </div>
+            <div>
+                Any act of violence is prohibited!
+            </div>
+        </div>
+    </div>
+</div>

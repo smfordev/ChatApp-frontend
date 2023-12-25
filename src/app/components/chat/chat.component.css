@@ -1,0 +1,153 @@
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height:100vh;
+}
+.card {
+    transition: 0.3s;
+    border-radius: 26px;
+    color: white;
+    background-color: #171717;
+    margin: 10px;
+    position: relative;
+    animation-name: card;
+    animation-duration: 3s;
+}
+
+.primaryCard {
+    width: 650px;
+    height: 650px;
+}
+
+.secondaryCard {
+    opacity: 0.8;
+    width: 320px;
+    height: 320px;
+}
+
+
+.description {
+    padding: 30px 30px 120px 30px;
+}
+
+.welcome {
+    text-align: center;
+    font-family: Inter;
+    width: 60%;
+    margin: auto;
+    padding-top: 50px;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+.chatContainer {
+    margin: auto;
+    margin-top: 20px;
+    max-height: 450px;
+}
+
+.chatContainerTop {
+    max-height: 400px;
+    overflow: auto;
+    padding-top: 6px;
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-bottom: 6px;
+}
+
+/* Width */
+::-webkit-scrollbar {
+    width: 4px;
+}
+   
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 8px;
+}
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 17px;
+}
+
+.main {
+    align-items: flex-end;
+}
+
+
+.label {
+    margin-bottom: 4px;
+    height: 16px;
+    font-size: 12px;
+}
+
+.message {
+    max-width: 400px;
+    width: fit-content;
+    height: fit-content;
+    white-space: normal;
+    overflow-wrap: break-word; 
+    padding: 8px ;
+}
+
+.mainMessage {
+    background-color: #4CBB17;
+    color: black;
+    border-radius: 8px 0px 0px 8px;
+}
+
+.externalMessage {
+    background-color: #0B0B0B;
+    border-radius: 0px 8px 8px 0px;
+}
+
+footer {
+    padding-right: 50px;
+    padding-left: 50px;
+}
+form {
+    /* position: fixed; */
+    display: flex;
+    border-bottom: 2px solid #FFFFFF;
+    padding-top: 12px;
+    order: 3;
+}
+
+textarea {
+    background: none;
+    border: none;
+    color: white;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    width: 100%;
+    min-height: 15px;
+    height: 15px;
+    max-height: 48px;
+    resize:none; 
+    overflow-y: hidden;
+}
+
+textarea:focus {
+    outline:none;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+@keyframes card {
+    10%   {top:90vh;}
+    100% {top:0px;}
+  }

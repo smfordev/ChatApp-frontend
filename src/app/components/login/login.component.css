@@ -1,0 +1,94 @@
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height:100vh;
+}
+.card {
+    transition: 0.3s;
+    border-radius: 26px;
+    color: white;
+    background-color: #171717;
+    padding: 50px;
+    margin: 10px;
+    position: relative;
+    animation-name: card;
+    animation-duration: 3s;
+}
+
+.primaryCard {
+    width: 420px;
+    height: 420px;
+}
+
+.secondaryCard {
+    opacity: 0.8;
+    width: 320px;
+    height: 320px;
+}
+
+.welcomeCard {
+    padding: 50px;
+}
+
+.description {
+    padding: 30px 30px 120px 30px;
+}
+
+
+.welcome {
+    text-align: center;
+    font-family: Inter;
+}
+
+form {
+    width:75%;
+    margin: auto;
+   margin-top: 72px;
+   margin-bottom: 72px;
+}
+
+.username {
+    margin-bottom: 17px;
+    width: 100%;
+}
+
+.label {
+    margin-bottom: 2px;
+    height: 18px;
+}
+
+input {
+    background: none;
+    border: none;
+    border-bottom: 2px solid #FFFFFF;
+    color: white;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    width: 100%;
+}
+
+input:focus {
+    outline:none;
+}
+
+button {
+    background-color: #4CBB17;
+    border-radius: 26px;
+    border: none;
+    height: 30px;
+    width: 100%;
+    font-family: Roboto;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #41a015;
+}
+
+@keyframes card {
+    10%   {top:90vh;}
+    100% {top:0px;}
+  }
