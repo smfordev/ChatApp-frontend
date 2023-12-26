@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="welcome">
-        <h2>SHARE NOW YOUR IDEAS WITH THE WORLD</h2>
+        <h2>SHARE NOW YOUR IDEAS WITH US</h2>
       </div>
     </div>
     <div class="chatContainer">
@@ -17,14 +17,21 @@
           class="chat"
           [ngClass]="{ main: msg.sender === getUsername }"
         >
-          <div class="label">@{{ msg.sender }}</div>
-          <div
-            class="message"
-            [ngClass]="
-              msg.sender === getUsername ? 'mainMessage' : 'externalMessage'
-            "
-          >
-            {{ msg.content }}
+          <div *ngIf="msg.content!==' joined the chat.' && msg.content !== ' left the chat.' ">
+            <div class="label">@{{ msg.sender }}</div>
+            <div
+              class="message"
+              [ngClass]="
+                msg.sender === getUsername ? 'mainMessage' : 'externalMessage'
+              "
+            >
+              {{ msg.content }}
+            </div>
+          </div>
+          <div class="joinDiv1" *ngIf="msg.content===' joined the chat.' || msg.content === ' left the chat.' ">
+            <div class="label message joinDiv2">
+              @{{ msg.sender }}{{ msg.content }}
+            </div>
           </div>
         </div>
       </div>

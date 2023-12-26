@@ -51,12 +51,18 @@ export class ChatComponent implements OnInit {
     })
 
     this.socketService.onEvent('updateTypingList', (typingList) => {
-
       this.typingUsers = [];
       typingList.forEach((username: string) => {
         this.typingUsers.push(username);
       });
-    })
+    });
+
+    this.socketService.onEvent('userJoined', (username) => {
+        this.messages.push({ sender: username, content: ' joined the chat.' });
+    });
+    this.socketService.onEvent('userLeft', (username) => {
+      this.messages.push({ sender: username, content: ' left the chat.' });
+  });
   }
 
   onBlurEvent() {
