@@ -19,7 +19,10 @@
             <form [formGroup]="loginForm" (ngSubmit)="authentication()">
                 <div class="username">
                     <div class="label">Username</div>
-                    <input formControlName="username" name="username" placeholder="Tape your username" required/>
+                    <input formControlName="username" name="username" placeholder="Tape your username"/>
+                    <small *ngIf="username.invalid && (username.dirty || username.touched)" style="color:tomato;">
+                        <div *ngIf="username.errors?.['required']">Username is empty.</div>
+                    </small>
                 </div>
                 <!-- <div>
                     <label>Mot de passe</label>
@@ -29,7 +32,7 @@
                 <div>
                     <a>Mot de passe oublié ?</a>
                 </div> -->
-                <button type="submit">Connect with us</button>
+                <button type="submit" [disabled]="loginForm.invalid">Connect with us</button>
             </form>
             <!-- <div>
             <p>Nouveau sur cette plateforme ?&nbsp;</p><a className='text-[#4CBB17]'>Inscrivez-vous</a>

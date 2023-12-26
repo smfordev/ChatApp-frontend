@@ -68,8 +68,10 @@ export class ChatComponent implements OnInit {
   }
 
   submit() {
-    this.socketService.emitEvent('message', this.message);
-    this.message = '';
+    if(this.message.trim()!==''){
+      this.socketService.emitEvent('message', this.message);
+      this.message = '';
+    }
   }
 
   get getUsername(): string | null {
@@ -100,4 +102,5 @@ export class ChatComponent implements OnInit {
       textArea.style.overflowY = 'hidden';
     }
   }
+  
 }

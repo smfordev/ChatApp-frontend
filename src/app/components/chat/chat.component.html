@@ -33,15 +33,15 @@
       <form (ngSubmit)="submit()">
         <textarea
           [(ngModel)]="message"
+          name="message"
           (blur)="onBlurEvent()"
           (focus)="onFocusEvent()"
-          name="message"
           placeholder="Type a message"
           (keydown.enter)="submit()"
           (input)="adjustTextArea($event)"
           required
         ></textarea>
-        <button type="submit">
+        <button type="submit" [hidden]="!message">
           <img src="assets/send.svg" />
         </button>
       </form>

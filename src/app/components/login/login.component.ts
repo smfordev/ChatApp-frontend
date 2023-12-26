@@ -24,6 +24,10 @@ export class LoginComponent {
     username: ['', Validators.required],
   });
 
+  get username() {
+    return this.loginForm.controls['username'];
+  }
+
   // authentication() {
   //   const user = {
   //     username: this.username,
@@ -40,8 +44,10 @@ export class LoginComponent {
 
   authentication() {
     const username = this.loginForm.value.username;
-    sessionStorage.setItem('username', username as string);
-    this.router.navigate(['/chat']);
+    if(username){
+      sessionStorage.setItem('username', username.trim() as string);
+      this.router.navigate(['/chat']);
+    }
     // this.authService.authentication(username as string).subscribe({
     //   next: (res: any) => {
     //   },

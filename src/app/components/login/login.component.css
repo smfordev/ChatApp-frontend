@@ -73,6 +73,15 @@ input:focus {
     outline:none;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  color: white;
+  /* Add other styles as needed */
+  transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s; /* Specify a long transition to override the browser's autofill styles */
+}
+
 button {
     background-color: #4CBB17;
     border-radius: 26px;
