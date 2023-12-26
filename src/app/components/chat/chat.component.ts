@@ -19,10 +19,7 @@ export class ChatComponent implements OnInit {
 
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
 
-  private baseUrl = 'http://localhost:3000';
-
   constructor(
-    private chatService: ChatService,
     private socketService: SocketService
   ) {}
 
