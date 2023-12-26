@@ -22,6 +22,18 @@ export class LoginComponent {
     return this.loginForm.controls['username'];
   }
 
+  ngOnInit(){
+    const username = sessionStorage.getItem('username');
+
+    if (username) {
+      // If username exists, navigate to the chat page
+      this.router.navigate(['/chat']);
+    } else {
+      // If username doesn't exist, navigate to the login page
+      this.router.navigate(['/']);
+    }
+  }
+
   authentication() {
     const username = this.loginForm.value.username;
     if(username){

@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Message } from 'src/app/interfaces/message';
 import { ChatService } from 'src/app/services/chat.service';
 import { SocketService } from 'src/app/services/socket.service';
@@ -20,10 +21,22 @@ export class ChatComponent implements OnInit {
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
 
   constructor(
-    private socketService: SocketService
+    private socketService: SocketService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+
+    const username = sessionStorage.getItem('username');
+
+    if (username) {
+      // If username exists, navigate to the chat page
+      this.router.navigate(['/chat']);
+    } else {
+      // If username doesn't exist, navigate to the login page
+      this.router.navigate(['/']);
+    }
+
     this.socketService.emitEvent(
       'setUsername',
       sessionStorage.getItem('username')
