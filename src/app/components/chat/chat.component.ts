@@ -32,47 +32,48 @@ export class ChatComponent implements OnInit {
     if (username) {
       // If username exists, navigate to the chat page
       this.router.navigate(['/chat']);
+      this.socketService.emitEvent(
+        'setUsername',
+        sessionStorage.getItem('username')
+      );
+  
+      this.socketService.onEvent('message', (msg) => {
+        this.messages.push({ sender: msg.user, content: msg.text });
+        this.scrollToBottom();
+      });
+  
+      this.socketService.onEvent('chatHistory', (msgs) => {
+        msgs.forEach((msg: { user: string; text: string }) => {
+          this.messages.push({ sender: msg.user, content: msg.text });
+        });
+      });
+  
+      this.socketService.onEvent('updateUserList', (onlineUsers) => {
+        this.connectedUsers = [];
+        onlineUsers.forEach((username: string) => {
+          this.connectedUsers.push(username);
+        });
+      })
+  
+      this.socketService.onEvent('updateTypingList', (typingList) => {
+        this.typingUsers = [];
+        typingList.forEach((username: string) => {
+          this.typingUsers.push(username);
+        });
+      });
+  
+      this.socketService.onEvent('userJoined', (username) => {
+          this.messages.push({ sender: username, content: ' joined the chat.' });
+      });
+      this.socketService.onEvent('userLeft', (username) => {
+        this.messages.push({ sender: username, content: ' left the chat.' });
+    });
     } else {
       // If username doesn't exist, navigate to the login page
       this.router.navigate(['/']);
     }
 
-    this.socketService.emitEvent(
-      'setUsername',
-      sessionStorage.getItem('username')
-    );
-
-    this.socketService.onEvent('message', (msg) => {
-      this.messages.push({ sender: msg.user, content: msg.text });
-      this.scrollToBottom();
-    });
-
-    this.socketService.onEvent('chatHistory', (msgs) => {
-      msgs.forEach((msg: { user: string; text: string }) => {
-        this.messages.push({ sender: msg.user, content: msg.text });
-      });
-    });
-
-    this.socketService.onEvent('updateUserList', (onlineUsers) => {
-      this.connectedUsers = [];
-      onlineUsers.forEach((username: string) => {
-        this.connectedUsers.push(username);
-      });
-    })
-
-    this.socketService.onEvent('updateTypingList', (typingList) => {
-      this.typingUsers = [];
-      typingList.forEach((username: string) => {
-        this.typingUsers.push(username);
-      });
-    });
-
-    this.socketService.onEvent('userJoined', (username) => {
-        this.messages.push({ sender: username, content: ' joined the chat.' });
-    });
-    this.socketService.onEvent('userLeft', (username) => {
-      this.messages.push({ sender: username, content: ' left the chat.' });
-  });
+   
   }
 
   onBlurEvent() {
